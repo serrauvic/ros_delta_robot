@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<package>
+    <name>delta_robot_img_processor</name>
+    <version>1.0.0</version>
+    <description>
+        Delta robot node for receiving image to detect circels for delta trajectory planning.
+    </description>
+
+    <!-- One maintainer tag required, multiple allowed, one person per tag -->
+    <maintainer email="sebastian.serra@uvic.cat">Sebastián Serra Landete</maintainer>
+    <maintainer email="jose.fernandez@uvic.cat">José Fernández Mola</maintainer>
+    <maintainer email="david.vives@uvic.cat">David Vives Colom</maintainer>
+    <maintainer email="gabriel.felez@uvic.cat">Gabriel Felez Palacios</maintainer>
+    <maintainer email="sergi.fabrego@uvic.cat">Sergi Fabrego i Serrat</maintainer>
+    <maintainer email="xavier.ortizquintana@uvic.cat">Xavier Ortiz-Quintana Escardivol</maintainer>
+
+    <!-- One license tag required, multiple allowed, one license per tag -->
+    <license>BSD</license>
+
+    <!-- Url tags are optional, but mutiple are allowed, one per tag -->
+    <url type="website"></url>
+
+    <!-- Author tags are optional, mutiple are allowed, one per tag -->
+    <author email="sebastian.serra@uvic.cat">Sebastián Serra Landete</author>
+    <author email="jose.fernandez@uvic.cat">José Fernández Mola</author>
+    <author email="david.vives@uvic.cat">David Vives Colom</author>
+    <author email="gabriel.felez@uvic.cat">Gabriel Felez Palacios</author>
+    <author email="sergi.fabrego@uvic.cat">Sergi Fabrego i Serrat</author>
+    <author email="xavier.ortizquintana@uvic.cat">Xavier Ortiz-Quintana Escardivol</author>
+
+    <!-- The *_depend tags are used to specify dependencies -->
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <build_depend>roscpp</build_depend>
+    <build_depend>rospy</build_depend>
+    <build_depend>image_transport</build_depend>
+    <build_depend>cv_bridge</build_depend>
+
+    <run_depend>roscpp</run_depend>
+    <run_depend>rospy</run_depend>
+    <run_depend>image_transport</run_depend>
+    <run_depend>cv_bridge</run_depend>
+
+</package>

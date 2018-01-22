@@ -1,0 +1,77 @@
+<!-- Launches ros_img_processor and two image windows-->
+
+<launch>
+	<!-- User arguments -->
+	<arg name="video_device"  default="/dev/video0" />
+	<arg name="show_image"  default="true" />
+	<arg name="max_steps"  default="0.1" />
+	<arg name="exec_freq"  default="2" />
+
+	<!-- camera capture -->
+	<node
+		name="usb_cam"
+		pkg="usb_cam"
+		type="usb_cam_node"
+		output="screen" >
+		<param name="video_device" value="$(arg video_device)" />
+		<param name="image_width" value="640" />
+		<param name="image_height" value="480" />
+		<param name="pixel_format" value="yuyv" />
+		<param name="camera_frame_id" value="usb_cam" />
+		<param name="io_method" value="mmap"/>
+	</node>
+
+	<!-- Provides rectified image, given raw image and camera info -->
+	<node
+		name="image_proc"
+		pkg="image_proc"
+		type="image_proc"
+		ns="usb_cam"
+		output="screen"
+		respawn="true" >
+	</node>
+
+	<!--Processor-->
+	<node name="delta_img_processor"
+		pkg="delta_robot_img_processor"
+		type="delta_robot_img_processor_node"
+		output="screen"
+		args="1">
+		<remap from="/delta_img_processor/image_in" to="/usb_cam/image_rect_color"/>
+		<remap from="/delta_img_processor/camera_info_in" to="/usb_cam/camera_info"/>
+	</node>
+
+  <!--driver-->
+	<node name="delta_robot_drivers"
+		pkg="delta_robot_drivers"
+		type="delta_angles_streamer_node"
+		output="screen"
+		args="">
+	</node>
+
+	<!-- display in/out image -->
+	<group if="$(arg show_image)">
+		<node
+			name="image_view_raw"
+			pkg="image_view"
+			type="image_view"
+			respawn="false"
+			output="screen">
+			<remap from="image" to="/usb_cam/image_raw"/>
+			<param name="autosize" value="false" />
+		</node>
+		<node
+			name="image_view_out"
+			pkg="image_view"
+			type="image_view"
+			respawn="false"
+			output="screen">
+			<remap from="image" to="/delta_img_processor/image_out"/>
+			<param name="autosize" value="false" />
+		</node>
+	</group>
+
+	<!-- rviz
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find copter_arm_robot)/config/copter.rviz"/>
+ -->
+</launch>
