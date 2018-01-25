@@ -31,7 +31,7 @@ void setCurrentTrajectory(const geometry_msgs::Vector3::ConstPtr& circle_center,
 
 /* Els següents defines haurien d'acabar sent paràmetres al ROS launch */
 #define DEF_MAX_STEP_SIZE 0.1
-#define DE_EXECUTION_FREQUENCY 2 /* Hz */
+#define DEF_EXECUTION_FREQUENCY 2 /* Hz */
 
 int main(int argc, char** argv)
 {
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
   double max_steps, exec_freq;
   std::string ip_addr;
   pnh.param<double>("max_steps", max_steps, DEF_MAX_STEP_SIZE);
-  pnh.param<double>("exec_freq", exec_freq, DE_EXECUTION_FREQUENCY);
+  pnh.param<double>("exec_freq", exec_freq, DEF_EXECUTION_FREQUENCY);
 
   ros::AsyncSpinner spinner(1);
 
@@ -50,11 +50,11 @@ int main(int argc, char** argv)
 
   ros::Rate loop_rate(exec_freq);
 
-  DeltaAnglesStreamer streamer(max_steps);
+  DeltaAnglesStreamer streamer(max_steps); //Subscriber quan arriba missatge crida funcio trajectoria
 
   ros::Subscriber coord =
       nh.subscribe<geometry_msgs::Vector3>("/delta_img_processor/center_ray_direction", 1,
-                      boost::bind(setCurrentTrajectory, _1, boost::ref(streamer)));
+                      boost::bind(setCurrentTrajectory, _1, boost::ref(streamer))); //streamer calculat
 
   while (ros::ok())
   {

@@ -51,8 +51,8 @@ void DeltaAnglesStreamer::setCurrentTrajectory(const double &x, const double &y,
     delta_kinematics::inversekinematics(
       currentPosition_.at<double>(0,0), currentPosition_.at<double>(1,0), z, theta_values);
 
-    // Rad to degrees
-    theta_values[0] = conversio * theta_values[0];
-    theta_values[1] = conversio * theta_values[1];
-    theta_values[2] = conversio * theta_values[2];
+    // Rad to degrees plus offset
+    theta_values[0] = (conversio * theta_values[0]);
+    theta_values[1] = (conversio * theta_values[1]);
+    theta_values[2] = (conversio * theta_values[2]);
 }
