@@ -1,4 +1,4 @@
-##delta_robot_firmware
+## delta_robot_firmware
 
 Load firmware to arduiono UNO
 
