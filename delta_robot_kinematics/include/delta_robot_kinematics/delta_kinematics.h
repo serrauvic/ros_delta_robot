@@ -31,6 +31,7 @@ const double peslsup = lsup*densitylsup*g;
 const double peslinf = linf*densitylinf*g;
 const double peseff = weighteff*g;
 const double offset = pi/2;
+
 namespace delta_kinematics
 {
 	/*

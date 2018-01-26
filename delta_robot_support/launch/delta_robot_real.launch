@@ -15,7 +15,7 @@
 	<arg name="exec_freq"    default="2" />
 	<arg name="name" 		     default="delta_robot"/>
 
-	<arg name="arduino"      default="false" doc="Specify whether the arduino board is connected or not."/>
+	<arg name="arduino"      default="true" doc="Specify whether the arduino board is connected or not."/>
 	<arg name="port" 				 default="/dev/ttyACM0"/>
 	<arg name="baud" 				 default="57600"/>
 

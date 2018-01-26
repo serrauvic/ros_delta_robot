@@ -1,0 +1,26 @@
+delta_robot:
+  # Publish all joint states ----------------------------------
+  delta_joint_state_controller:
+     type: joint_state_controller/JointStateController
+     publish_rate: 50
+
+  # Joint Trajectory Controller -------------------------------
+  delta_position_trajectory_controller:
+     type: position_controllers/JointTrajectoryController
+     # CR: Here is my point, can the urdf/transmission specification be used for joint names?
+     joints:
+        - link_0_JOINT_1
+        - link_0_JOINT_2
+        - link_0_JOINT_3
+     constraints:
+        goal_time: 5.0
+        stopped_position_tolerance: 0.4 # Defaults to 0.01
+        joint1:
+            trajectory: 0.60
+            goal:       0.15
+        joint2:
+            trajectory: 0.60
+            goal:       0.15
+        joint3:
+            trajectory: 0.60
+            goal:       0.15

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>delta_robot_support</name>
+  <name>delta_robot_firmware</name>
   <version>1.0.0</version>
-  <description>The delta_robot_support package</description>
+  <description>The delta_robot_arduino_firmware package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <maintainer email="sebastian.serra@uvic.cat">Sebastián Serra Landete</maintainer>

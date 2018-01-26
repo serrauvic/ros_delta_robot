@@ -13,7 +13,7 @@ void setCurrentTrajectory(const geometry_msgs::Vector3::ConstPtr& circle_center,
     //ROS_INFO("Setting new trajectory x: %d y:%d", circle_center->x, circle_center->y);
     geometry_msgs::Vector3 new_circle_center = *circle_center;
     ROS_INFO("=========================");
-    ROS_INFO("Setting new trajectory x: %f y: %f", new_circle_center.x, new_circle_center.y);
+    ROS_INFO("Setting new trajectory x: %f y: %f z:%f", new_circle_center.x, new_circle_center.y, new_circle_center.z);
 
     /*Pot passar que si el node de la càmera no existeix, el valor subscrit valdrà
         un Not A Number. Això és un problema si es fa càlcul numèric. Les següents linies
@@ -23,6 +23,18 @@ void setCurrentTrajectory(const geometry_msgs::Vector3::ConstPtr& circle_center,
 
     streamer.setCurrentTrajectory(new_circle_center.x, new_circle_center.y, theta_values);
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// si thetas = 360 valor fora de rang.!!!!!! NO s'han d'aplicar.
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // Guard against bad trajectory
+/*
+    if (theta_values[0] == 360
+     || theta_values[1] == 360
+     || theta_values[2] == 360)
+     {
+       return;
+     }
+*/
     ROS_INFO("Trajectory angles Theta1: %f Theta2: %f Theta3: %f"
     , theta_values[0], theta_values[1], theta_values[2]);
 
@@ -50,11 +62,11 @@ int main(int argc, char** argv)
 
   ros::Rate loop_rate(exec_freq);
 
-  DeltaAnglesStreamer streamer(max_steps); //Subscriber quan arriba missatge crida funcio trajectoria
+  DeltaAnglesStreamer streamer(max_steps);
 
   ros::Subscriber coord =
-      nh.subscribe<geometry_msgs::Vector3>("/delta_img_processor/center_ray_direction", 1,
-                      boost::bind(setCurrentTrajectory, _1, boost::ref(streamer))); //streamer calculat
+      nh.subscribe<geometry_msgs::Vector3>("/delta_img_processor/center_ray_direction", 1000,
+                      boost::bind(setCurrentTrajectory, _1, boost::ref(streamer)));
 
   while (ros::ok())
   {
