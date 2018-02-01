@@ -1,7 +1,8 @@
 ## ROS delta robot.
 ROS Delta Robot
 
-[![Assembly test one](https://img.youtube.com/vi/pI4uqf1SEYo/0.jpg)](https://www.youtube.com/watch?v=pI4uqf1SEYo)
+[![Assembly test one](https://img.youtube.com/vi/qOeS8mAfZcc/0.jpg)](https://www.youtube.com/watch?v=qOeS8mAfZcc)
+[![Assembly test two](https://img.youtube.com/vi/pI4uqf1SEYo/0.jpg)](https://www.youtube.com/watch?v=pI4uqf1SEYo)
 
 * delta_robot_support
 Project containing global launch files,URDFs and meshes.
