@@ -5,9 +5,9 @@ project(delta_robot_support)
 find_package(catkin REQUIRED
   urdf
   std_msgs
-  joint_trajectory_action
+#  joint_trajectory_action
   trajectory_msgs
-  pr2_controllers_msgs
+#  pr2_controllers_msgs
   position_controllers
   joint_state_controller
   roscpp

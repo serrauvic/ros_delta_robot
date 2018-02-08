@@ -113,8 +113,8 @@ void RosImgProcessorNode::publish()
 
       // publish center ray direction.
       geometry_msgs::Vector3 direction;
-      direction.x = ray_direction_.at<double>(0, 0);
-      direction.y = ray_direction_.at<double>(1, 0);
+      direction.x = ray_direction_.at<double>(0, 0); //Minus added for matching the robot mounting bracket
+      direction.y = -ray_direction_.at<double>(1, 0);
       direction.z = ray_direction_.at<double>(2, 0);
       ray_direction_circle_pub.publish(direction);
 	}

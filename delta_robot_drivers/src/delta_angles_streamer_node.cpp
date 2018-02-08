@@ -42,8 +42,8 @@ void setCurrentTrajectory(const geometry_msgs::Vector3::ConstPtr& circle_center,
 }
 
 /* Els següents defines haurien d'acabar sent paràmetres al ROS launch */
-#define DEF_MAX_STEP_SIZE 0.1
-#define DEF_EXECUTION_FREQUENCY 2 /* Hz */
+#define DEF_MAX_STEP_SIZE 0.05
+#define DEF_EXECUTION_FREQUENCY 5 /* Hz */
 
 int main(int argc, char** argv)
 {

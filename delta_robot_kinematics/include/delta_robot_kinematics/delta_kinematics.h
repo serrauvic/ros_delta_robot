@@ -5,10 +5,10 @@
 
 /********************Contants***********************************************/
 const double pi = 3.14159265358979323846;
-const double sb = 0.19;
-const double sp = 0.15;
-const double lsup = 0.14;
-const double linf = 0.46;//0.46;
+const double sb = 0.2;
+const double sp = 0.08;
+const double lsup = 0.095;
+const double linf = 0.315;//0.46;
 const double conversio = 180/pi;
 
 //densitats

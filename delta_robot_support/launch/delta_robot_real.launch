@@ -9,7 +9,7 @@
 	<arg name="gui" 				 default="true"/>
 	<arg name="headless" 		 default="false"/>
 
-	<arg name="video_device" default="/dev/video0" />
+	<arg name="video_device" default="/dev/video1"/>
 	<arg name="show_image"   default="true" />
 	<arg name="max_steps"    default="0.1" />
 	<arg name="exec_freq"    default="2" />

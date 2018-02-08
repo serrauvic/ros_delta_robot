@@ -24,19 +24,26 @@ DeltaAnglesStreamer::~DeltaAnglesStreamer()
 void DeltaAnglesStreamer::setCurrentTrajectory(const double &x, const double &y, double theta_values[])
 {
   //double theta_values [3] = {0, 0, 0};
-  double z = -0.35;
+  double x_sc, y_sc, z = -0.25;
+  if (x > 0.175) x_sc = 0.175;
+  else if (x < -0.175) x_sc = -0.175;
+  else x_sc = x;
+
+  if (y > 0.175) y_sc = 0.175;
+  else if (y < -0.175) y_sc = -0.175;
+  else y_sc = y;
 
   /* Aquí s'entra en matèria, es crea el vector "posició final" en base al topic subscrit */
-  cv::Mat goalPosition = (cv::Mat_<double>(2,1) << x, y);
+  cv::Mat goalPosition = (cv::Mat_<double>(2,1) << x_sc, y_sc);
   /* El vector director serà, per tant, l'extrem menys la posició actual*/
-  directionVector_ = goalPosition - currentPosition_;
+  directionVector_ = goalPosition ;//- currentPosition_; //TXEMA
   /* Aquest vector director no es pot aplicar a saco, cal fer-ho en trossos petits cada cert temps.
   Les següents línies miren si el vector director és prou petit. Si ho és, ja l'aplica tot. Per
   comprovar-ho, mira la seva distància i li aplica el valor absolut*/
   if (fabs(cv::norm(directionVector_, cv::NORM_L2)) <  steps_)
   {
     uDirectionVector_ = cv::Mat_<double>::zeros(2, 1);
-    currentPosition_  = goalPosition;
+    //currentPosition_  = goalPosition; //TXEMA
   }
   /* Però la majoria de vegades caldrà anar partint la trajectòria. Per partir-la, es calcula
   primer el vector unitari que es correspon a la direcció del vector director. El vector unitari,
@@ -47,7 +54,7 @@ void DeltaAnglesStreamer::setCurrentTrajectory(const double &x, const double &y,
     //Calcula el vector unitari
     uDirectionVector_ = directionVector_ / cv::norm(directionVector_, cv::NORM_L2);
     //Multiplica el vector unitari per un valor petit i el suma a la posició actual
-    currentPosition_ = currentPosition_ + uDirectionVector_ * steps_;
+    currentPosition_ = currentPosition_ + directionVector_ * steps_;// uDirectionVector_ * steps_; //txema
   }
   // IK
   delta_kinematics::inversekinematics(

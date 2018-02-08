@@ -35,38 +35,38 @@
     // comprobació de si els valors són reals
     if ((sol1min < pi/2) && (sol1min > -pi/2))
     {
-      thetas[0] = sol1min + offset;
+      thetas[0] = -sol1min + offset;
     }
     else if ((sol1plus < pi/2) && (sol1plus > -pi/2))
     {
-      thetas[0] = sol1plus + offset;
+      thetas[0] = -sol1plus + offset;
     }
     else
     {
-      thetas[0] = 2*pi; //plus offset 360º error sing
+      thetas[0] = offset; //plus offset  error sing
     }
     if ((sol2min < pi/2) && (sol2min > -pi/2))
     {
-      thetas[1] = sol2min + offset;
+      thetas[1] = -sol2min + offset;
     }
     else if ((sol2plus < pi/2) && (sol2plus > -pi/2))
     {
-      thetas[1] = sol2plus + offset;
+      thetas[1] = -sol2plus + offset;
     }
     else
     {
-      thetas[1] = 2*pi; //plus offset 360º error sing
+      thetas[1] = offset; //plus offset  error sing
     }
     if ((sol3min < pi/2) && (sol3min > -pi/2))
     {
-      thetas[2] = sol3min + offset;
+      thetas[2] = -sol3min + offset;
     }
     else if ((sol3plus < pi/2) && (sol3plus > -pi/2))
     {
-      thetas[2] = sol3plus + offset;
+      thetas[2] = -sol3plus + offset;
     }
     else
     {
-      thetas[2] = 2*pi; //plus offset 360º error sing
+      thetas[2] = offset; //plus offset  error sing
     }
   }
