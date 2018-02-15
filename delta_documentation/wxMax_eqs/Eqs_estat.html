@@ -1,0 +1,302 @@
+<!DOCTYPE HTML">
+<HTML>
+ <HEAD>
+  <TITLE>Eqs_estat</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    displayAlign: "left",
+    context: "MathJax"
+  })
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
+  <link rel="stylesheet" type="text/css" href="Eqs_estat_htmlimg/Eqs_estat.css"/>
+ </HEAD>
+ <BODY>
+
+<!-- ***************************************************** -->
+<!--          Created with wxMaxima version 16.12.0         -->
+<!-- ***************************************************** -->
+<noscript><div class="error message">    Please enable JavaScript in order to get a 2d display of the equations embedded in this web page.</div></noscript>\(      \DeclareMathOperator{\abs}{abs}
+      \newcommand{\ensuremath}[1]{\mbox{$#1$}}
+\)
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Equacions cinemàtiques del robot Delta<BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Basat en &quot;The Delta parallel robot: Kinematics Solutions&quot; de Robert L. Williams II<BR>
+</P>
+
+
+<!-- Code cell -->
+
+
+<TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+ -->	
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+<span class="code_function">kill</span>(<span class="code_variable">all</span>)<span class="code_endofline">$</span><BR>
+<span class="code_variable">simp</span><span class="code_operator">:</span>true<span class="code_endofline">$</span>  </SPAN></TD>
+</TR></TABLE>
+
+
+
+<!-- Image cell -->
+
+
+<P CLASS="image">
+Figure 1:/home/txema/Documents/IntegrationProject/Personal/wxMax/Diagrama gobal.png
+<BR/>
+  <IMG src="Eqs_estat_htmlimg/Eqs_estat_0.png" alt="Diagram" style="max-width:90%;" >
+
+<!-- Image cell -->
+
+
+<P CLASS="image">
+Figure 2:/home/txema/Documents/IntegrationProject/Personal/wxMax/Diagrama bases.png
+<BR/>
+  <IMG src="Eqs_estat_htmlimg/Eqs_estat_1.png" alt="Diagram" style="max-width:90%;" >
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Primer pas, es defineixen els punts coneguts. Aquests són B i P. Per fer-ho fàcil es tenen en consideració 2 coses. La primera és que en comptes de representar P en funció dels angles theta, el que es fa és partir des del final. En aquest cas, com es vol resoldre el problema &quot;invers&quot;, es considera que x, y, z de l'end effector són coneguts. La segona consideració són les equacions següents:<BR>
+</P>
+
+
+<!-- Code cell -->
+
+
+<TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+ -->	
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+<span class="code_variable">wB</span> <span class="code_operator">=</span> <span class="code_variable">s_B</span><span class="code_operator">*</span><span class="code_function">sqrt</span>(<span class="code_number">3</span>)<span class="code_operator">/</span><span class="code_number">6</span><span class="code_endofline">;</span><BR>
+<span class="code_variable">uB</span> <span class="code_operator">=</span> <span class="code_variable">s_B</span><span class="code_operator">*</span><span class="code_function">sqrt</span>(<span class="code_number">3</span>)<span class="code_operator">/</span><span class="code_number">3</span><span class="code_endofline">;</span><BR>
+<span class="code_variable">wP</span> <span class="code_operator">=</span> <span class="code_variable">s_P</span><span class="code_operator">*</span><span class="code_function">sqrt</span>(<span class="code_number">3</span>)<span class="code_operator">/</span><span class="code_number">6</span><span class="code_endofline">;</span><BR>
+<span class="code_variable">uP</span> <span class="code_operator">=</span> <span class="code_variable">s_P</span><span class="code_operator">*</span><span class="code_function">sqrt</span>(<span class="code_number">3</span>)<span class="code_operator">/</span><span class="code_number">3</span><span class="code_endofline">;</span><BR>
+  </SPAN></TD>
+</TR></TABLE>
+\[\tag{\% o2} \mathit{wB}=\frac{{s_B}}{2 \sqrt{3}}\]
+\[\tag{\% o3} \mathit{uB}=\frac{{s_B}}{\sqrt{3}}\]
+\[\tag{\% o4} \mathit{wP}=\frac{{s_P}}{2 \sqrt{3}}\]
+\[\tag{\% o5} \mathit{uP}=\frac{{s_P}}{\sqrt{3}}\]
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Fet això es defineixen els punts B i P, tenint en compte les definicions anteriors:<BR>
+</P>
+
+
+<!-- Code cell -->
+
+
+<TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+ -->	
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+<span class="code_variable">B1</span><span class="code_operator">:</span>[<span class="code_number">0</span>,<span class="code_operator">-</span><span class="code_variable">w_B</span>,<span class="code_number">0</span>]<span class="code_endofline">;</span><BR>
+<span class="code_variable">B2</span><span class="code_operator">:</span>[<span class="code_variable">w_B</span><span class="code_operator">*</span><span class="code_function">sqrt</span>(<span class="code_number">3</span>)<span class="code_operator">/</span><span class="code_number">2</span>,<span class="code_number">1</span><span class="code_operator">/</span><span class="code_number">2</span><span class="code_operator">*</span><span class="code_variable">w_B</span>,<span class="code_number">0</span>]<span class="code_endofline">;</span><BR>
+<span class="code_variable">B3</span><span class="code_operator">:</span>[<span class="code_operator">-</span><span class="code_variable">w_B</span><span class="code_operator">*</span><span class="code_function">sqrt</span>(<span class="code_number">3</span>)<span class="code_operator">/</span><span class="code_number">2</span>,<span class="code_number">1</span><span class="code_operator">/</span><span class="code_number">2</span><span class="code_operator">*</span><span class="code_variable">w_B</span>,<span class="code_number">0</span>]<span class="code_endofline">;</span><BR>
+<span class="code_variable">P1</span><span class="code_operator">:</span>[<span class="code_variable">x</span>,<span class="code_variable">y</span><span class="code_operator">-</span><span class="code_variable">u_P</span>,<span class="code_variable">z</span>]<span class="code_endofline">;</span><BR>
+<span class="code_variable">P2</span><span class="code_operator">:</span>[<span class="code_variable">x</span><span class="code_operator">+</span><span class="code_variable">s_P</span><span class="code_operator">/</span><span class="code_number">2</span>,<span class="code_variable">y</span><span class="code_operator">+</span><span class="code_variable">w_P</span>,<span class="code_variable">z</span>]<span class="code_endofline">;</span><BR>
+<span class="code_variable">P3</span><span class="code_operator">:</span>[<span class="code_variable">x</span><span class="code_operator">-</span><span class="code_variable">s_P</span><span class="code_operator">/</span><span class="code_number">2</span>,<span class="code_variable">y</span><span class="code_operator">+</span><span class="code_variable">w_P</span>,<span class="code_variable">z</span>]<span class="code_endofline">;</span>  </SPAN></TD>
+</TR></TABLE>
+\[\tag{B1}[0,-{w_B},0]\]
+\[\tag{B2}[\frac{\sqrt{3}\, {w_B}}{2},\frac{{w_B}}{2},0]\]
+\[\tag{B3}[-\frac{\sqrt{3}\, {w_B}}{2},\frac{{w_B}}{2},0]\]
+\[\tag{P1}[x,y-{u_P},z]\]
+\[\tag{P2}[\frac{{s_P}}{2}+x,{w_P}+y,z]\]
+\[\tag{P3}[x-\frac{{s_P}}{2},{w_P}+y,z]\]
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ara ve el pas clau. Primer cal no perdre de vista l'objectiu principal del que s'està buscant, que és relacionar en una equació les thetas i les coordenades de l'end-effector {x,y,z}. Per fer-ho, l'autor de l'article proposa el següent:<BR>- Amb les dades que es tenen, es pot arribar a trobar les coordenades del punt A. Simplement és la suma de dos vectors: OB+BA. Com la theta és una de les variables que s'estan buscant, es pot fer servir en l'equació. El que no es pot fer és anar més enllà, perquè els angles que formen L i l no són coneguts i dependran de la posició de l'End-Effector. Dit d'una altra manera, no hi ha forma d'imposar els angles entre L i l, perqué no hi ha actuadors.<BR>- Per altra banda, es pot conèixer fàcilment les coordenades dels punts P. De fet ja estan calculades més amunt. {x,y,z} són desconeguts, però ja va bé que apareguin en l'equació, perquè justament el que es vol és relacionar les coordenades {x,y,z} amb {theta1, theta2, theta3}.<BR><BR>Ara ve la idea feliç, per relacionar els 2 punts anteriors el que proposa l'article és el següent:<BR>- l és una distància coneguda, per tant, si es troba el vector que va des de A fins a P i es busca el seu mòdul, automàticament es té l. Aplicant la fórmula d'extrem menys origen per calcular el vector l i obtenint el seu mòdul, apareixen les equacions del robot Delta.<BR>
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Càlcul de OA=OB+BA<BR>
+</P>
+
+
+<!-- Code cell -->
+
+
+<TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+ -->	
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+<span class="code_variable">A1</span><span class="code_operator">:</span><span class="code_variable">B1</span><span class="code_operator">+</span>[<span class="code_number">0</span>,<span class="code_operator">-</span><span class="code_variable">L</span><span class="code_operator">*</span><span class="code_function">cos</span>(<span class="code_variable">theta_1</span>),<span class="code_operator">-</span><span class="code_variable">L</span><span class="code_operator">*</span><span class="code_function">sin</span>(<span class="code_variable">theta_1</span>)]<span class="code_endofline">;</span><BR>
+<span class="code_variable">A2</span><span class="code_operator">:</span><span class="code_variable">B2</span><span class="code_operator">+</span>[<span class="code_function">sqrt</span>(<span class="code_number">3</span>)<span class="code_operator">*</span><span class="code_variable">L</span><span class="code_operator">*</span><span class="code_function">cos</span>(<span class="code_variable">theta_2</span>)<span class="code_operator">/</span><span class="code_number">2</span>,<span class="code_variable">L</span><span class="code_operator">*</span><span class="code_function">cos</span>(<span class="code_variable">theta_2</span>)<span class="code_operator">/</span><span class="code_number">2</span>,<span class="code_operator">-</span><span class="code_variable">L</span><span class="code_operator">*</span><span class="code_function">sin</span>(<span class="code_variable">theta_2</span>)]<span class="code_endofline">;</span><BR>
+<span class="code_variable">A3</span><span class="code_operator">:</span><span class="code_variable">B3</span><span class="code_operator">+</span>[<span class="code_operator">-</span><span class="code_function">sqrt</span>(<span class="code_number">3</span>)<span class="code_operator">*</span><span class="code_variable">L</span><span class="code_operator">*</span><span class="code_function">cos</span>(<span class="code_variable">theta_3</span>)<span class="code_operator">/</span><span class="code_number">2</span>,<span class="code_variable">L</span><span class="code_operator">*</span><span class="code_function">cos</span>(<span class="code_variable">theta_3</span>)<span class="code_operator">/</span><span class="code_number">2</span>,<span class="code_operator">-</span><span class="code_variable">L</span><span class="code_operator">*</span><span class="code_function">sin</span>(<span class="code_variable">theta_3</span>)]<span class="code_endofline">;</span><BR>
+  </SPAN></TD>
+</TR></TABLE>
+\[\tag{A1}[0,-{w_B}-\cos{\left( {{theta}_1}\right) } L,-\sin{\left( {{theta}_1}\right) } L]\]
+\[\tag{A2}[\frac{\sqrt{3}\, {w_B}}{2}+\frac{\sqrt{3}\, \cos{\left( {{theta}_2}\right) } L}{2},\frac{{w_B}}{2}+\frac{\cos{\left( {{theta}_2}\right) } L}{2},-\sin{\left( {{theta}_2}\right) } L]\]
+\[\tag{A3}[-\frac{\sqrt{3}\, {w_B}}{2}-\frac{\sqrt{3}\, \cos{\left( {{theta}_3}\right) } L}{2},\frac{{w_B}}{2}+\frac{\cos{\left( {{theta}_3}\right) } L}{2},-\sin{\left( {{theta}_3}\right) } L]\]
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Càlcul del vector l=P-OA. S'incorpora un petit canvi de variable per facilitar els càlculs:<BR>a=w_B-u_P<BR>b=-sqrt(3)/2*w_B+s_P/2<BR>c=-w_B/2+w_P<BR>Aquests canvis de variable es fan amb la funció ratsubst de manera que ratsubst(a,w_B-u_P,P1-A1) vol dir que busqui en P1-A1 la seqüència w_B-u_P i hi posi una a<BR>
+</P>
+
+
+<!-- Code cell -->
+
+
+<TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+ -->	
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+<span class="code_variable">vectl1</span><span class="code_operator">:</span><span class="code_function">ratsubst</span>(<span class="code_variable">a</span>,<span class="code_variable">w_B</span><span class="code_operator">-</span><span class="code_variable">u_P</span>,<span class="code_variable">P1</span><span class="code_operator">-</span><span class="code_variable">A1</span>)<span class="code_endofline">;</span><BR>
+<span class="code_variable">vectl2</span><span class="code_operator">:</span><span class="code_function">ratsubst</span>(<span class="code_variable">b</span>,<span class="code_operator">-</span><span class="code_function">sqrt</span>(<span class="code_number">3</span>)<span class="code_operator">/</span><span class="code_number">2</span><span class="code_operator">*</span><span class="code_variable">w_B</span><span class="code_operator">+</span><span class="code_variable">s_P</span><span class="code_operator">/</span><span class="code_number">2</span>,<span class="code_function">expand</span>(<span class="code_variable">P2</span><span class="code_operator">-</span><span class="code_variable">A2</span>))<span class="code_endofline">$</span><BR>
+<span class="code_variable">vectl2</span><span class="code_operator">:</span><span class="code_function">ratsubst</span>(<span class="code_variable">c</span>,<span class="code_operator">-</span><span class="code_variable">w_B</span><span class="code_operator">/</span><span class="code_number">2</span><span class="code_operator">+</span><span class="code_variable">w_P</span>,<span class="code_function">expand</span>(<span class="code_variable">vectl2</span>))<span class="code_endofline">;</span><BR>
+<span class="code_variable">vectl3</span><span class="code_operator">:</span><span class="code_function">ratsubst</span>(<span class="code_variable">b</span>,<span class="code_operator">-</span><span class="code_function">sqrt</span>(<span class="code_number">3</span>)<span class="code_operator">/</span><span class="code_number">2</span><span class="code_operator">*</span><span class="code_variable">w_B</span><span class="code_operator">+</span><span class="code_variable">s_P</span><span class="code_operator">/</span><span class="code_number">2</span>,<span class="code_function">expand</span>(<span class="code_variable">P3</span><span class="code_operator">-</span><span class="code_variable">A3</span>))<span class="code_endofline">$</span><BR>
+<span class="code_variable">vectl3</span><span class="code_operator">:</span><span class="code_function">ratsubst</span>(<span class="code_variable">c</span>,<span class="code_operator">-</span><span class="code_variable">w_B</span><span class="code_operator">/</span><span class="code_number">2</span><span class="code_operator">+</span><span class="code_variable">w_P</span>,<span class="code_function">expand</span>(<span class="code_variable">vectl3</span>))<span class="code_endofline">;</span>  </SPAN></TD>
+</TR></TABLE>
+\[\tag{vectl1}[x,\cos{\left( {{theta}_1}\right) } L+y+a,\sin{\left( {{theta}_1}\right) } L+z]\]
+\[\tag{vectl2}[-\frac{-2 b-2 x+\sqrt{3}\, \cos{\left( {{theta}_2}\right) } L}{2},-\frac{-2 c-2 y+\cos{\left( {{theta}_2}\right) } L}{2},\sin{\left( {{theta}_2}\right) } L+z]\]
+\[\tag{vectl3}[\frac{-2 b+2 x+\sqrt{3}\, \cos{\left( {{theta}_3}\right) } L}{2},-\frac{-2 c-2 y+\cos{\left( {{theta}_3}\right) } L}{2},\sin{\left( {{theta}_3}\right) } L+z]\]
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Finalment es calcula el mòdul dels vectors anteriors i s'igualen a l. Per evitar les arrels quadrades, es deixa tot elevat al quadrat:<BR>
+</P>
+
+
+<!-- Code cell -->
+
+
+<TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+ -->	
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+<span class="code_variable">l1</span><span class="code_operator">:</span> <span class="code_function">expand</span>(<span class="code_variable">vectl1</span>[<span class="code_number">1</span>]²<span class="code_operator">+</span><span class="code_variable">vectl1</span>[<span class="code_number">2</span>]²<span class="code_operator">+</span><span class="code_variable">vectl1</span>[<span class="code_number">3</span>]²<span class="code_operator">=</span><span class="code_variable">l</span>²)<span class="code_endofline">;</span><BR>
+<span class="code_variable">l2</span><span class="code_operator">:</span> <span class="code_function">expand</span>(<span class="code_variable">vectl2</span>[<span class="code_number">1</span>]²<span class="code_operator">+</span><span class="code_variable">vectl2</span>[<span class="code_number">2</span>]²<span class="code_operator">+</span><span class="code_variable">vectl2</span>[<span class="code_number">3</span>]²<span class="code_operator">=</span><span class="code_variable">l</span>²)<span class="code_endofline">;</span><BR>
+<span class="code_variable">l3</span><span class="code_operator">:</span> <span class="code_function">expand</span>(<span class="code_variable">vectl3</span>[<span class="code_number">1</span>]²<span class="code_operator">+</span><span class="code_variable">vectl3</span>[<span class="code_number">2</span>]²<span class="code_operator">+</span><span class="code_variable">vectl3</span>[<span class="code_number">3</span>]²<span class="code_operator">=</span><span class="code_variable">l</span>²)<span class="code_endofline">;</span>  </SPAN></TD>
+</TR></TABLE>
+\[\tag{l1}{{\sin{\left( {{theta}_1}\right) }}^{2}} {{L}^{2}}+{{\cos{\left( {{theta}_1}\right) }}^{2}} {{L}^{2}}+2 \sin{\left( {{theta}_1}\right) } z L+2 \cos{\left( {{theta}_1}\right) } y L+2 a\, \cos{\left( {{theta}_1}\right) } L+{{z}^{2}}+{{y}^{2}}+2 a y+{{x}^{2}}+{{a}^{2}}={{l}^{2}}\]
+\[\tag{l2}{{\sin{\left( {{theta}_2}\right) }}^{2}} {{L}^{2}}+{{\cos{\left( {{theta}_2}\right) }}^{2}} {{L}^{2}}+2 \sin{\left( {{theta}_2}\right) } z L-\cos{\left( {{theta}_2}\right) } y L-\sqrt{3}\, \cos{\left( {{theta}_2}\right) } x L-c\, \cos{\left( {{theta}_2}\right) } L-\sqrt{3} b\, \cos{\left( {{theta}_2}\right) } L+{{z}^{2}}+{{y}^{2}}+2 c y+{{x}^{2}}+2 b x+{{c}^{2}}+{{b}^{2}}={{l}^{2}}\]
+\[\tag{l3}{{\sin{\left( {{theta}_3}\right) }}^{2}} {{L}^{2}}+{{\cos{\left( {{theta}_3}\right) }}^{2}} {{L}^{2}}+2 \sin{\left( {{theta}_3}\right) } z L-\cos{\left( {{theta}_3}\right) } y L+\sqrt{3}\, \cos{\left( {{theta}_3}\right) } x L-c\, \cos{\left( {{theta}_3}\right) } L-\sqrt{3} b\, \cos{\left( {{theta}_3}\right) } L+{{z}^{2}}+{{y}^{2}}+2 c y+{{x}^{2}}-2 b x+{{c}^{2}}+{{b}^{2}}={{l}^{2}}\]
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Per simplificar trigonomètricament:<BR>
+</P>
+
+
+<!-- Code cell -->
+
+
+<TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+ -->	
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+<span class="code_variable">EQ_STATE_1</span><span class="code_operator">:</span><span class="code_function">facsum</span>(<span class="code_function">trigsimp</span>(<span class="code_variable">l1</span>),<span class="code_function">cos</span>(<span class="code_variable">theta_1</span>))<span class="code_endofline">;</span><BR>
+<span class="code_variable">EQ_STATE_2</span><span class="code_operator">:</span><span class="code_function">facsum</span>(<span class="code_function">trigsimp</span>(<span class="code_variable">l2</span>),<span class="code_function">cos</span>(<span class="code_variable">theta_2</span>))<span class="code_endofline">;</span><BR>
+<span class="code_variable">EQ_STATE_3</span><span class="code_operator">:</span><span class="code_function">facsum</span>(<span class="code_function">trigsimp</span>(<span class="code_variable">l3</span>),<span class="code_function">cos</span>(<span class="code_variable">theta_3</span>))<span class="code_endofline">;</span>  </SPAN></TD>
+</TR></TABLE>
+\[\tag{EQ\_ STATE\_ 1}{{L}^{2}}+2 \sin{\left( {{theta}_1}\right) } z L+2 \cos{\left( {{theta}_1}\right) } \left( a+y\right)  L+{{z}^{2}}+{{y}^{2}}+2 a y+{{x}^{2}}+{{a}^{2}}={{l}^{2}}\]
+\[\tag{EQ\_ STATE\_ 2}{{L}^{2}}+2 \sin{\left( {{theta}_2}\right) } z L-\cos{\left( {{theta}_2}\right) } \left( \sqrt{3} b+c+\sqrt{3} x+y\right)  L+{{z}^{2}}+{{y}^{2}}+2 c y+{{x}^{2}}+2 b x+{{c}^{2}}+{{b}^{2}}={{l}^{2}}\]
+\[\tag{EQ\_ STATE\_ 3}{{L}^{2}}+2 \sin{\left( {{theta}_3}\right) } z L-\cos{\left( {{theta}_3}\right) } \left( \sqrt{3} b+c-\sqrt{3} x+y\right)  L+{{z}^{2}}+{{y}^{2}}+2 c y+{{x}^{2}}-2 b x+{{c}^{2}}+{{b}^{2}}={{l}^{2}}\]
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Per calcular la matriu Jacobiana es van derivant les funcions anteriors. Per fer-ho, es reescriuen posant totes les variables en funció de X,Y,Z i s'aplica la funció. En aquest cas és molt complicat arribar a la mateixa expressió que l'article, tot i que el resultat és el mateix.<BR>
+</P>
+
+
+<!-- Code cell -->
+
+
+<TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+ -->	
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+<span class="code_variable">EQ_1</span><span class="code_operator">:</span> <span class="code_function">ratsubst</span>(<span class="code_function">theta_1</span>(<span class="code_variable">x</span>,<span class="code_variable">y</span>,<span class="code_variable">z</span>),<span class="code_variable">theta_1</span>,<span class="code_variable">EQ_STATE_1</span>)<span class="code_endofline">;</span><BR>
+<span class="code_variable">EQ_2</span><span class="code_operator">:</span> <span class="code_function">ratsubst</span>(<span class="code_function">theta_2</span>(<span class="code_variable">x</span>,<span class="code_variable">y</span>,<span class="code_variable">z</span>),<span class="code_variable">theta_2</span>,<span class="code_variable">EQ_STATE_2</span>)<span class="code_endofline">;</span><BR>
+<span class="code_variable">EQ_3</span><span class="code_operator">:</span> <span class="code_function">ratsubst</span>(<span class="code_function">theta_3</span>(<span class="code_variable">x</span>,<span class="code_variable">y</span>,<span class="code_variable">z</span>),<span class="code_variable">theta_3</span>,<span class="code_variable">EQ_STATE_3</span>)<span class="code_endofline">;</span><BR>
+  </SPAN></TD>
+</TR></TABLE>
+\[\tag{EQ\_ 1}{{L}^{2}}+\left( 2 a\, \cos{\left( {{theta}_1}\left( x,y,z\right) \right) }+2 \cos{\left( {{theta}_1}\left( x,y,z\right) \right) } y+2 \sin{\left( {{theta}_1}\left( x,y,z\right) \right) } z\right)  L+{{z}^{2}}+{{y}^{2}}+2 a y+{{x}^{2}}+{{a}^{2}}={{l}^{2}}\]
+\[\tag{EQ\_ 2}{{L}^{2}}+\left( \left( -\sqrt{3} x-c-\sqrt{3} b\right) \, \cos{\left( {{theta}_2}\left( x,y,z\right) \right) }-\cos{\left( {{theta}_2}\left( x,y,z\right) \right) } y+2 \sin{\left( {{theta}_2}\left( x,y,z\right) \right) } z\right)  L+{{z}^{2}}+{{y}^{2}}+2 c y+{{x}^{2}}+2 b x+{{c}^{2}}+{{b}^{2}}={{l}^{2}}\]
+\[\tag{EQ\_ 3}{{L}^{2}}+\left( \left( \sqrt{3} x-c-\sqrt{3} b\right) \, \cos{\left( {{theta}_3}\left( x,y,z\right) \right) }-\cos{\left( {{theta}_3}\left( x,y,z\right) \right) } y+2 \sin{\left( {{theta}_3}\left( x,y,z\right) \right) } z\right)  L+{{z}^{2}}+{{y}^{2}}+2 c y+{{x}^{2}}-2 b x+{{c}^{2}}+{{b}^{2}}={{l}^{2}}\]
+
+
+<!-- Code cell -->
+
+
+<TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+ -->	
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ <span class="code_function">facsum</span>(<span class="code_function">diff</span>(<span class="code_variable">EQ_1</span>,<span class="code_variable">x</span>),<span class="code_function">diff</span>(<span class="code_function">theta_1</span>(<span class="code_variable">x</span>,<span class="code_variable">y</span>,<span class="code_variable">z</span>),<span class="code_variable">x</span>))<span class="code_endofline">;</span>  </SPAN></TD>
+</TR></TABLE>
+\[\tag{\% o51} 2 \left( \frac{d}{d x} {{theta}_1}\left( x,y,z\right) \right)  \left( -a\, \sin{\left( {{theta}_1}\left( x,y,z\right) \right) }-\sin{\left( {{theta}_1}\left( x,y,z\right) \right) } y+\cos{\left( {{theta}_1}\left( x,y,z\right) \right) } z\right)  L+2 x=0\]
+
+
+<!-- Code cell -->
+
+
+<TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+ -->	
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+<span class="code_function">jacobian</span>([<span class="code_function">lhs</span>(<span class="code_variable">EQ_1</span>),<span class="code_function">lhs</span>(<span class="code_variable">EQ_2</span>),<span class="code_function">lhs</span>(<span class="code_variable">EQ_3</span>)],[<span class="code_variable">x</span>,<span class="code_variable">y</span>,<span class="code_variable">z</span>])<span class="code_endofline">$</span><BR>
+<span class="code_function">facsum</span>(<span class="code_variable">%</span>,<span class="code_function">diff</span>(<span class="code_function">theta_1</span>(<span class="code_variable">x</span>,<span class="code_variable">y</span>,<span class="code_variable">z</span>),<span class="code_variable">x</span>),<span class="code_function">diff</span>(<span class="code_function">theta_2</span>(<span class="code_variable">x</span>,<span class="code_variable">y</span>,<span class="code_variable">z</span>),<span class="code_variable">x</span>),<span class="code_function">diff</span>(<span class="code_function">theta_3</span>(<span class="code_variable">x</span>,<span class="code_variable">y</span>,<span class="code_variable">z</span>),<span class="code_variable">x</span>))<span class="code_endofline">;</span><BR>
+  </SPAN></TD>
+</TR></TABLE>
+\[\tag{\% o55} \begin{pmatrix}2 \left( \frac{d}{d x} {{theta}_1}\left( x,y,z\right) \right)  \left( -a\, \sin{\left( {{theta}_1}\left( x,y,z\right) \right) }-\sin{\left( {{theta}_1}\left( x,y,z\right) \right) } y+\cos{\left( {{theta}_1}\left( x,y,z\right) \right) } z\right)  L+2 x & 2 \left( \cos{\left( {{theta}_1}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_1}\left( x,y,z\right) \right)  z L-\sin{\left( {{theta}_1}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_1}\left( x,y,z\right) \right)  y L-a\, \sin{\left( {{theta}_1}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_1}\left( x,y,z\right) \right)  L+\cos{\left( {{theta}_1}\left( x,y,z\right) \right) } L+y+a\right)  & 2 \left( \cos{\left( {{theta}_1}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_1}\left( x,y,z\right) \right)  z L-\sin{\left( {{theta}_1}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_1}\left( x,y,z\right) \right)  y L-a\, \sin{\left( {{theta}_1}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_1}\left( x,y,z\right) \right)  L+\sin{\left( {{theta}_1}\left( x,y,z\right) \right) } L+z\right) \\
+\left( \frac{d}{d x} {{theta}_2}\left( x,y,z\right) \right)  \left( \sqrt{3} b\, \sin{\left( {{theta}_2}\left( x,y,z\right) \right) }+c\, \sin{\left( {{theta}_2}\left( x,y,z\right) \right) }+\sqrt{3} x\, \sin{\left( {{theta}_2}\left( x,y,z\right) \right) }+\sin{\left( {{theta}_2}\left( x,y,z\right) \right) } y+2 \cos{\left( {{theta}_2}\left( x,y,z\right) \right) } z\right)  L-\sqrt{3}\, \cos{\left( {{theta}_2}\left( x,y,z\right) \right) } L+2 x+2 b & 2 \cos{\left( {{theta}_2}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_2}\left( x,y,z\right) \right)  z L+\sin{\left( {{theta}_2}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_2}\left( x,y,z\right) \right)  y L+\sqrt{3} x\, \sin{\left( {{theta}_2}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_2}\left( x,y,z\right) \right)  L+c\, \sin{\left( {{theta}_2}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_2}\left( x,y,z\right) \right)  L+\sqrt{3} b\, \sin{\left( {{theta}_2}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_2}\left( x,y,z\right) \right)  L-\cos{\left( {{theta}_2}\left( x,y,z\right) \right) } L+2 y+2 c & 2 \cos{\left( {{theta}_2}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_2}\left( x,y,z\right) \right)  z L+\sin{\left( {{theta}_2}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_2}\left( x,y,z\right) \right)  y L+\sqrt{3} x\, \sin{\left( {{theta}_2}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_2}\left( x,y,z\right) \right)  L+c\, \sin{\left( {{theta}_2}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_2}\left( x,y,z\right) \right)  L+\sqrt{3} b\, \sin{\left( {{theta}_2}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_2}\left( x,y,z\right) \right)  L+2 \sin{\left( {{theta}_2}\left( x,y,z\right) \right) } L+2 z\\
+\left( \frac{d}{d x} {{theta}_3}\left( x,y,z\right) \right)  \left( \sqrt{3} b\, \sin{\left( {{theta}_3}\left( x,y,z\right) \right) }+c\, \sin{\left( {{theta}_3}\left( x,y,z\right) \right) }-\sqrt{3} x\, \sin{\left( {{theta}_3}\left( x,y,z\right) \right) }+\sin{\left( {{theta}_3}\left( x,y,z\right) \right) } y+2 \cos{\left( {{theta}_3}\left( x,y,z\right) \right) } z\right)  L+\sqrt{3}\, \cos{\left( {{theta}_3}\left( x,y,z\right) \right) } L+2 x-2 b & 2 \cos{\left( {{theta}_3}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_3}\left( x,y,z\right) \right)  z L+\sin{\left( {{theta}_3}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_3}\left( x,y,z\right) \right)  y L-\sqrt{3} x\, \sin{\left( {{theta}_3}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_3}\left( x,y,z\right) \right)  L+c\, \sin{\left( {{theta}_3}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_3}\left( x,y,z\right) \right)  L+\sqrt{3} b\, \sin{\left( {{theta}_3}\left( x,y,z\right) \right) } \left( \frac{d}{d y} {{theta}_3}\left( x,y,z\right) \right)  L-\cos{\left( {{theta}_3}\left( x,y,z\right) \right) } L+2 y+2 c & 2 \cos{\left( {{theta}_3}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_3}\left( x,y,z\right) \right)  z L+\sin{\left( {{theta}_3}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_3}\left( x,y,z\right) \right)  y L-\sqrt{3} x\, \sin{\left( {{theta}_3}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_3}\left( x,y,z\right) \right)  L+c\, \sin{\left( {{theta}_3}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_3}\left( x,y,z\right) \right)  L+\sqrt{3} b\, \sin{\left( {{theta}_3}\left( x,y,z\right) \right) } \left( \frac{d}{d z} {{theta}_3}\left( x,y,z\right) \right)  L+2 \sin{\left( {{theta}_3}\left( x,y,z\right) \right) } L+2 z\end{pmatrix}\]
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+ </BODY>
+</HTML>
