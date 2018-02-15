@@ -35,11 +35,11 @@
     // comprobació de si els valors són reals
     if ((sol1min < pi/2) && (sol1min > -pi/2))
     {
-      thetas[0] = -sol1min + offset;
+      thetas[0] = -sol1min*angleTrim + offset;
     }
     else if ((sol1plus < pi/2) && (sol1plus > -pi/2))
     {
-      thetas[0] = -sol1plus + offset;
+      thetas[0] = -sol1plus*angleTrim + offset;
     }
     else
     {
@@ -47,11 +47,11 @@
     }
     if ((sol2min < pi/2) && (sol2min > -pi/2))
     {
-      thetas[1] = -sol2min + offset;
+      thetas[1] = -sol2min*angleTrim + offset;
     }
     else if ((sol2plus < pi/2) && (sol2plus > -pi/2))
     {
-      thetas[1] = -sol2plus + offset;
+      thetas[1] = -sol2plus*angleTrim + offset;
     }
     else
     {
@@ -59,11 +59,11 @@
     }
     if ((sol3min < pi/2) && (sol3min > -pi/2))
     {
-      thetas[2] = -sol3min + offset;
+      thetas[2] = -sol3min*angleTrim + offset;
     }
     else if ((sol3plus < pi/2) && (sol3plus > -pi/2))
     {
-      thetas[2] = -sol3plus + offset;
+      thetas[2] = -sol3plus*angleTrim + offset;
     }
     else
     {

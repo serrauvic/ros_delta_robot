@@ -32,6 +32,8 @@ const double peslinf = linf*densitylinf*g;
 const double peseff = weighteff*g;
 const double offset = pi/2;
 
+const double angleTrim = 0.8;
+
 namespace delta_kinematics
 {
 	/*

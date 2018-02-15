@@ -11,8 +11,8 @@
 
 	<arg name="video_device" default="/dev/video1"/>
 	<arg name="show_image"   default="true" />
-	<arg name="max_steps"    default="0.1" />
-	<arg name="exec_freq"    default="2" />
+	<arg name="max_steps"    default="0.05" />
+	<arg name="exec_freq"    default="10" />
 	<arg name="name" 		     default="delta_robot"/>
 
 	<arg name="arduino"      default="true" doc="Specify whether the arduino board is connected or not."/>

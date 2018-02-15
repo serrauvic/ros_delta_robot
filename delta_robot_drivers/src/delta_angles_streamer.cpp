@@ -24,17 +24,9 @@ DeltaAnglesStreamer::~DeltaAnglesStreamer()
 void DeltaAnglesStreamer::setCurrentTrajectory(const double &x, const double &y, double theta_values[])
 {
   //double theta_values [3] = {0, 0, 0};
-  double x_sc, y_sc, z = -0.25;
-  if (x > 0.175) x_sc = 0.175;
-  else if (x < -0.175) x_sc = -0.175;
-  else x_sc = x;
-
-  if (y > 0.175) y_sc = 0.175;
-  else if (y < -0.175) y_sc = -0.175;
-  else y_sc = y;
-
+  double z = -0.25;
   /* Aquí s'entra en matèria, es crea el vector "posició final" en base al topic subscrit */
-  cv::Mat goalPosition = (cv::Mat_<double>(2,1) << x_sc, y_sc);
+  cv::Mat goalPosition = (cv::Mat_<double>(2,1) << x, y);
   /* El vector director serà, per tant, l'extrem menys la posició actual*/
   directionVector_ = goalPosition ;//- currentPosition_; //TXEMA
   /* Aquest vector director no es pot aplicar a saco, cal fer-ho en trossos petits cada cert temps.
@@ -54,8 +46,18 @@ void DeltaAnglesStreamer::setCurrentTrajectory(const double &x, const double &y,
     //Calcula el vector unitari
     uDirectionVector_ = directionVector_ / cv::norm(directionVector_, cv::NORM_L2);
     //Multiplica el vector unitari per un valor petit i el suma a la posició actual
-    currentPosition_ = currentPosition_ + directionVector_ * steps_;// uDirectionVector_ * steps_; //txema
+    currentPosition_ = currentPosition_ + directionVector_ * steps_;// Kind of proportional controller
   }
+
+
+  if (currentPosition_.at<double>(0,0) > 0.175) currentPosition_.at<double>(0,0) = 0.175;
+  else if (currentPosition_.at<double>(0,0) < -0.175) currentPosition_.at<double>(0,0) = -0.175;
+ 
+  if (currentPosition_.at<double>(1,0) > 0.175) currentPosition_.at<double>(1,0) = 0.175;
+  else if (currentPosition_.at<double>(1,0) < -0.175) currentPosition_.at<double>(1,0) = -0.175;
+
+  ROS_INFO("=========================");
+  ROS_INFO("Current position: %f y: %f z:%f", currentPosition_.at<double>(0,0), currentPosition_.at<double>(1,0), z);
   // IK
   delta_kinematics::inversekinematics(
     currentPosition_.at<double>(0,0), currentPosition_.at<double>(1,0), z, theta_values);

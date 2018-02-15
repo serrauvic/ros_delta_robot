@@ -12,8 +12,8 @@ void setCurrentTrajectory(const geometry_msgs::Vector3::ConstPtr& circle_center,
 
     //ROS_INFO("Setting new trajectory x: %d y:%d", circle_center->x, circle_center->y);
     geometry_msgs::Vector3 new_circle_center = *circle_center;
-    ROS_INFO("=========================");
-    ROS_INFO("Setting new trajectory x: %f y: %f z:%f", new_circle_center.x, new_circle_center.y, new_circle_center.z);
+//    ROS_INFO("=========================");
+//    ROS_INFO("Setting new trajectory x: %f y: %f z:%f", new_circle_center.x, new_circle_center.y, new_circle_center.z);
 
     /*Pot passar que si el node de la càmera no existeix, el valor subscrit valdrà
         un Not A Number. Això és un problema si es fa càlcul numèric. Les següents linies
@@ -43,7 +43,7 @@ void setCurrentTrajectory(const geometry_msgs::Vector3::ConstPtr& circle_center,
 
 /* Els següents defines haurien d'acabar sent paràmetres al ROS launch */
 #define DEF_MAX_STEP_SIZE 0.05
-#define DEF_EXECUTION_FREQUENCY 5 /* Hz */
+#define DEF_EXECUTION_FREQUENCY 10 /* Hz */
 
 int main(int argc, char** argv)
 {
