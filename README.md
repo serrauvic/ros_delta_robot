@@ -26,7 +26,7 @@ roslaunch delta_robot_support delta_robot_sim.launch
 
 roslaunch delta_robot_support delta_robot_real.launch
 
-Looking for more information? Visit the delta_documentation folder. There can be found simulations in scilab and all the equation development for the kinematics problem. 
+**Looking for more information?** Visit the delta_documentation folder. There can be found simulations in scilab and all the equation development for the kinematic problems. There are also all the mechanical parts printed for the project in the delta_mechanical folder. 
 
 [![Assembly test one](https://img.youtube.com/vi/qOeS8mAfZcc/0.jpg)](https://www.youtube.com/watch?v=qOeS8mAfZcc)
 [![Assembly test two](https://img.youtube.com/vi/pI4uqf1SEYo/0.jpg)](https://www.youtube.com/watch?v=pI4uqf1SEYo)
